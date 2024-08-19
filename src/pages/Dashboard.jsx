@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 
 const Dashboard = () => {
@@ -14,7 +15,6 @@ const Dashboard = () => {
             </ol>
           </nav>
         </div>
-
         <section className="section dashboard">
           <div className="row">
 

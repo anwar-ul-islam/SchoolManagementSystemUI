@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import { useTable, usePagination, useSortBy, useGlobalFilter } from "react-table";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import AcademicModal from "./AcademicModal";
 import ConfirmationModal from "./ConfirmationModal"; 
 
 // eslint-disable-next-line react/prop-types
@@ -12,16 +11,19 @@ const DataTable = ({ data, columns, onUpdate, onDelete }) => {
   // Define the action column with edit and delete buttons
   const actionColumn = useMemo(() => ({
     Header: "Actions",
+    // eslint-disable-next-line react/prop-types
     Cell: ({ row }) => (
       <div>
         <button
           className="btn btn-sm btn-primary me-2"
+          // eslint-disable-next-line react/prop-types
           onClick={() => (row.original)}
         >
           <FaEdit />
         </button>
         <button
           className="btn btn-sm btn-danger"
+          // eslint-disable-next-line react/prop-types
           onClick={() => handleDeleteClick(row.original)}
         >
           <FaTrashAlt />
@@ -203,7 +205,7 @@ const DataTable = ({ data, columns, onUpdate, onDelete }) => {
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteConfirm}
         title="Confirm Deletion"
-        message="Are you sure you want to delete this item?"        
+        message="Are you sure you want to delete this Data?"        
       />
     </>
   );
