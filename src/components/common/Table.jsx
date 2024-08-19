@@ -24,13 +24,17 @@ const DataTable = ({ title, data = [], columns, onUpdate, onDelete }) => {
     handleCloseModal();
   };
 
+
+  // Define the action column with edit and delete buttons
   const actionColumn = useMemo(() => ({
     Header: "Actions",
+    // eslint-disable-next-line react/prop-types
     Cell: ({ row }) => (
-      <div className="d-flex">
+      <div>
         <button
           className="btn btn-sm btn-primary me-2"
-          onClick={() => handleUpdate(row.original)}
+          // eslint-disable-next-line react/prop-types
+          onClick={() => (row.original)}
         >
           <FaEdit />
         </button>
@@ -44,6 +48,7 @@ const DataTable = ({ title, data = [], columns, onUpdate, onDelete }) => {
     ),
   }), [onUpdate, onDelete]);
 
+  // Add the action column to the columns array
   const extendedColumns = useMemo(() => [...columns, actionColumn], [columns, actionColumn]);
 
   const {
@@ -93,15 +98,13 @@ const DataTable = ({ title, data = [], columns, onUpdate, onDelete }) => {
 
   return (
     <>
-      <div className="pagetitle">
-        <h1>{title}</h1>
-      </div>
-
+      {/* Table Section */}
       <section className="section">
         <div className="row">
           <div className="col-lg-12">
             <div className="card py-3">
               <div className="card-body">
+                {/* Search */}
                 <input
                   value={globalFilter || ""}
                   onChange={(e) => setGlobalFilter(e.target.value)}
@@ -109,15 +112,31 @@ const DataTable = ({ title, data = [], columns, onUpdate, onDelete }) => {
                   className="form-control mb-3"
                 />
 
-                <table {...getTableProps()} className="table datatable table-bordered">
+                {/* Table */}
+                <table
+                  {...getTableProps()}
+                  className="table datatable table-bordered"
+                >
                   <thead>
                     {headerGroups.map((headerGroup, headerGroupIndex) => (
-                      <tr key={`header-group-${headerGroupIndex}`} {...headerGroup.getHeaderGroupProps()}>
+                      <tr
+                        key={`header-group-${headerGroupIndex}`}
+                        {...headerGroup.getHeaderGroupProps()}
+                      >
                         {headerGroup.headers.map((column, columnIndex) => (
-                          <th key={`column-${columnIndex}`} {...column.getHeaderProps(column.getSortByToggleProps())}>
+                          <th
+                            key={`column-${columnIndex}`}
+                            {...column.getHeaderProps(
+                              column.getSortByToggleProps()
+                            )}
+                          >
                             {column.render("Header")}
                             <span>
-                              {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                              {column.isSorted
+                                ? column.isSortedDesc
+                                  ? " 🔽"
+                                  : " 🔼"
+                                : ""}
                             </span>
                           </th>
                         ))}
@@ -130,7 +149,10 @@ const DataTable = ({ title, data = [], columns, onUpdate, onDelete }) => {
                       return (
                         <tr key={`row-${rowIndex}`} {...row.getRowProps()}>
                           {row.cells.map((cell, cellIndex) => (
-                            <td key={`cell-${rowIndex}-${cellIndex}`} {...cell.getCellProps()}>
+                            <td
+                              key={`cell-${rowIndex}-${cellIndex}`}
+                              {...cell.getCellProps()}
+                            >
                               {cell.render("Cell")}
                             </td>
                           ))}
@@ -140,27 +162,43 @@ const DataTable = ({ title, data = [], columns, onUpdate, onDelete }) => {
                   </tbody>
                 </table>
 
+                {/* Pagination */}
                 <div className="d-flex justify-content-between">
                   <div>
-                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                    <button
+                      onClick={() => gotoPage(0)}
+                      disabled={!canPreviousPage}
+                    >
                       {"<<"}
                     </button>{" "}
-                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                    <button
+                      onClick={() => previousPage()}
+                      disabled={!canPreviousPage}
+                    >
                       {"<"}
                     </button>{" "}
                     <button onClick={() => nextPage()} disabled={!canNextPage}>
                       {">"}
                     </button>{" "}
-                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                    <button
+                      onClick={() => gotoPage(pageCount - 1)}
+                      disabled={!canNextPage}
+                    >
                       {">>"}
                     </button>{" "}
                     <span>
-                      Page <strong>{pageIndex + 1} of {pageOptions.length}</strong>
+                      Page{" "}
+                      <strong>
+                        {pageIndex + 1} of {pageOptions.length}
+                      </strong>{" "}
                     </span>
                   </div>
 
                   <div>
-                    <select value={pageSize} onChange={(e) => setPageSize(Number(e.target.value))}>
+                    <select
+                      value={pageSize}
+                      onChange={(e) => setPageSize(Number(e.target.value))}
+                    >
                       {[10, 20, 30, 40, 50].map((size) => (
                         <option key={size} value={size}>
                           Show {size}

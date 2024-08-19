@@ -1,6 +1,7 @@
 import SideBar from "./SideBar";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
+import BackToTopButton from "./BackToTopButton";
 
 const Wrapper = () => {
   return (
@@ -8,6 +9,7 @@ const Wrapper = () => {
       <Header />
       <SideBar />
       <Outlet />
+      <BackToTopButton/>
     </>
   );
 };

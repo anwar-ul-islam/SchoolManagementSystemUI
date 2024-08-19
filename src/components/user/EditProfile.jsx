@@ -16,13 +16,13 @@ const EditProfile = () => {
                 <a
                   href="#"
                   className="btn btn-primary btn-sm"
-                  title="Upload new profile image"
+                  title="Upload new profile image "
                 >
-                  <i className="bi bi-upload"></i>
+                  <i className="bi bi-upload "></i>
                 </a>
                 <a
                   href="#"
-                  className="btn btn-danger btn-sm"
+                  className="btn btn-danger btn-sm ms-2"
                   title="Remove my profile image"
                 >
                   <i className="bi bi-trash"></i>

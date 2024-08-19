@@ -4,6 +4,7 @@ import Classroom from '../components/academic/Classroom';
 import Class from '../components/academic/Class';
 import AcademicModal from '../components/common/AcademicModal';
 
+
 const Academic = () => {
     const classFields = [
         { label: "Class Name", name: "className", type: "text" },
