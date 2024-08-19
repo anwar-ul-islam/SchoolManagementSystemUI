@@ -148,6 +148,12 @@ const SideBar = () => {
               <i className="bi bi-person"></i>
               <span>Academic</span>
             </Link>
+            <li className="nav-item">
+            <Link className="nav-link collapsed" to="/adminstration">
+              <i className="bi bi-gear"></i>
+              <span>Admnistration</span>
+            </Link>
+          </li>
           </li>
         </ul>
       </aside>

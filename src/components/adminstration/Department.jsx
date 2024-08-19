@@ -35,7 +35,7 @@ const Department = () => {
         maxHeight: "300px",
       }}
     >
-      <DataTable title="Department" data={data} columns={columns} />
+      <DataTable title="Department" data={data} columns={columns}  />
     </div>
   );
 };
