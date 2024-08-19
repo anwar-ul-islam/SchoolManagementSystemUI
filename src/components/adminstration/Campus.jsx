@@ -1,8 +1,9 @@
+import { useState } from "react";
 import DataTable from "../common/Table";
 
 const Campus = () => {
   // Example data
-  const data = [
+  const initialData = [
     {
       id: 1,
       campusName: "Campus 1",
@@ -49,7 +50,12 @@ const Campus = () => {
     { Header: "Email", accessor: "email"  },
     { Header: "Phone number", accessor: "phoneNumber"  },
   ];
+  const [data, setData] = useState(initialData);
 
+  const handleDelete = (rowData) => {
+    const updatedData = data.filter((item) => item.id !== rowData.id);
+    setData(updatedData);
+  };
   return (
     <div
       style={{
@@ -59,7 +65,7 @@ const Campus = () => {
         maxHeight: "300px",
       }}
     >
-      <DataTable title="Campus" data={data} columns={columns} />
+      <DataTable title="Campus" data={data} columns={columns} onDelete={handleDelete} />
     </div>
   );
 };

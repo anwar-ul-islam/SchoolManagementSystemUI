@@ -2,11 +2,10 @@ import { useState, useMemo } from "react";
 import { useTable, usePagination, useSortBy, useGlobalFilter } from "react-table";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AcademicModal from "./AcademicModal";
-import ConfirmationModal from "./ConfirmationModal"; // Import the ConfirmationModal component
+import ConfirmationModal from "./ConfirmationModal"; 
 
 // eslint-disable-next-line react/prop-types
 const DataTable = ({ data, columns, onUpdate, onDelete }) => {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedRowData, setSelectedRowData] = useState(null);
 
@@ -17,7 +16,7 @@ const DataTable = ({ data, columns, onUpdate, onDelete }) => {
       <div>
         <button
           className="btn btn-sm btn-primary me-2"
-          onClick={() => handleEditClick(row.original)}
+          onClick={() => (row.original)}
         >
           <FaEdit />
         </button>
@@ -62,31 +61,25 @@ const DataTable = ({ data, columns, onUpdate, onDelete }) => {
 
   const { pageIndex, pageSize, globalFilter } = state;
 
-  // Handle edit click
-  const handleEditClick = (rowData) => {
-    setSelectedRowData(rowData);
-    setIsEditModalOpen(true);
-  };
 
   // Handle delete click
   const handleDeleteClick = (rowData) => {
     setSelectedRowData(rowData);
     setIsDeleteModalOpen(true);
+    console.log('Deleted');
+    
   };
 
   // Handle delete confirmation
   const handleDeleteConfirm = () => {
     onDelete(selectedRowData);
     setIsDeleteModalOpen(false);
+    alert('Deleted Data SucessFully')
+
+    console.log('Deleted Data SucessFully');
+    
   };
 
-  // Handle form submission in edit modal
-  const handleEditModalSubmit = (event) => {
-    event.preventDefault();
-    const updatedData = Object.fromEntries(new FormData(event.target).entries());
-    onUpdate(updatedData);
-    setIsEditModalOpen(false);
-  };
 
   return (
     <>
@@ -204,29 +197,13 @@ const DataTable = ({ data, columns, onUpdate, onDelete }) => {
           </div>
         </div>
       </section>
-
-      {/* Academic Modal */}
-      {isEditModalOpen && selectedRowData && (
-        <AcademicModal
-          id="editModal"
-          title="Edit Academic Details"
-          fields={columns.map(col => ({
-            label: col.Header,
-            name: col.accessor,
-            type: 'text', // Assuming all are text inputs, modify based on your needs
-          }))}
-          initialValues={selectedRowData}
-          onSubmit={handleEditModalSubmit}
-        />
-      )}
-
       {/* Confirmation Modal for Delete */}
       <ConfirmationModal
         show={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteConfirm}
         title="Confirm Deletion"
-        message="Are you sure you want to delete this item?"
+        message="Are you sure you want to delete this item?"        
       />
     </>
   );
