@@ -1,55 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import DataTable from "../common/Table";
 
 const StudentList = () => {
-  const data = [
+  const initialData = [
     {
-      name: "Unity Pugh",
-      ext: 9958,
-      city: "Curicó",
-      startDate: "2005/02/11",
-      completion: 37,
+      id: 1,
+      name: "Hassan Shaheer",
+      fname: "Khan Hasan",
+      admission: "IV",
+      date: "2005/02/11",
+      address: "905, Street 4, Main Boulevard, DHA, Karachi.",
     },
     {
-      name: "Theodore Duran",
-      ext: 8971,
-      city: "Dhanbad",
-      startDate: "1999/04/07",
-      completion: 97,
+      id: 2,
+      name: "Zakir",
+      fname: "Fakhir Khan",
+      admission: "V",
+      date: "2005/02/11",
+      address: "905, Street 4, Main Boulevard, DHA, Karachi.",
     },
     {
-      name: "Kylie Bishop",
-      ext: 3147,
-      city: "Norman",
-      startDate: "2005/09/08",
-      completion: 63,
-    },
-    {
-      name: "Willow Gilliam",
-      ext: 3497,
-      city: "Amqui",
-      startDate: "2009/05/11",
-      completion: 30,
-    },
-    {
-      name: "Blossom Dickerson",
-      ext: 5018,
-      city: "Kempten",
-      startDate: "2006/11/09",
-      completion: 17,
-    },
+      id: 3,
+      name: "Ahsan",
+      fname: "Samar Obaid",
+      admission: "VI",
+      date: "2005/02/11",
+      address: "905, Street 4, Main Boulevard, DHA, Karachi.",
+    }
   ];
   const columns = [
-    { Header: "Full Name", accessor: "name" },
-    { Header: "Ext.", accessor: "ext" },
-    { Header: "City", accessor: "city" },
-    { Header: "Start Date", accessor: "startDate" },
-    { Header: "Completion", accessor: "completion" }, 
+    { Header: "First Name", accessor: "name" },
+    { Header: "Father Name.", accessor: "fname" },
+    { Header: "Admission Required", accessor: "admission" },
+    { Header: "Date of Birth", accessor: "date" },
+    { Header: "Address", accessor: "address" }, 
   ]
+
+  const fields = [
+    { accessor: 'name', label: 'First Name', type: 'text', name: 'name' },
+    { accessor: 'fname', label: 'Father Name', type: 'text', name: 'fname' },
+    { accessor: 'admission', label: 'Admission Required in Class', type: 'text', name: 'admission' },
+    { accessor: 'dob', label: 'Date of Birth', type: 'date', name: 'date' },
+    { accessor: 'address', label: 'Address', type: 'text', name: 'address' },
+  ];
+
+  const [data, setData] = useState(initialData);
+    const handleDelete = (rowData) => {
+      const updatedData = data.filter((item) => item.id !== rowData.id);
+      setData(updatedData);
+    };
+
   return (
     <>
     <main id="main" className="main">
-      <DataTable title="Students Applications List" data={data} columns={columns} />
+      <DataTable title="Students Applications List" data={data} columns={columns} onDelete={handleDelete} />
       </main>
     </>
   );
