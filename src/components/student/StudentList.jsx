@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import DataTable from "../common/Table";
 
 const StudentList = () => {
+
+    const fields = [
+    { accessor: 'name', label: 'First Name', type: 'text', name: 'name' },
+    { accessor: 'fname', label: 'Father Name', type: 'text', name: 'fname' },
+    { accessor: 'admission', label: 'Admission Required in Class', type: 'text', name: 'admission' },
+    { accessor: 'dob', label: 'Date of Birth', type: 'date', name: 'date' },
+    { accessor: 'address', label: 'Address', type: 'text', name: 'address' },
+  ];
+
   const initialData = [
     {
       id: 1,
@@ -36,14 +45,6 @@ const StudentList = () => {
     { Header: "Address", accessor: "address" }, 
   ]
 
-  const fields = [
-    { accessor: 'name', label: 'First Name', type: 'text', name: 'name' },
-    { accessor: 'fname', label: 'Father Name', type: 'text', name: 'fname' },
-    { accessor: 'admission', label: 'Admission Required in Class', type: 'text', name: 'admission' },
-    { accessor: 'dob', label: 'Date of Birth', type: 'date', name: 'date' },
-    { accessor: 'address', label: 'Address', type: 'text', name: 'address' },
-  ];
-
   const [data, setData] = useState(initialData);
     const handleDelete = (rowData) => {
       const updatedData = data.filter((item) => item.id !== rowData.id);
@@ -53,7 +54,7 @@ const StudentList = () => {
   return (
     <>
     <main id="main" className="main">
-      <DataTable title="Students Applications List" data={data} columns={columns} onDelete={handleDelete} />
+      <DataTable title="Students Applications List" data={data} columns={columns} onDelete={handleDelete} fields={fields} />
       </main>
     </>
   );

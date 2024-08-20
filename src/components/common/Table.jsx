@@ -34,7 +34,8 @@ const DataTable = ({ title, data = [], columns, onUpdate, onDelete }) => {
         <button
           className="btn btn-sm btn-primary me-2"
           // eslint-disable-next-line react/prop-types
-          onClick={() => (row.original)}
+          onClick={() => handleUpdate(row.original)}
+          
         >
           <FaEdit />
         </button>
@@ -95,6 +96,13 @@ const DataTable = ({ title, data = [], columns, onUpdate, onDelete }) => {
     console.log('Deleted Data SucessFully');
     
   };
+  // Dynamically generate the fields array based on the columns prop
+  const fields = columns.map(col => ({
+    accessor: col.accessor,
+    label: col.Header,
+    type: col.accessor === 'date' ? 'date' : 'text', // Assuming 'date' column accessor uses a date picker
+    name: col.accessor,
+  }));
 
   return (
     <>
